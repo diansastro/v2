@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">TMDB</string>
+    <string name="press_back_to_exit">Press back to exit</string>
+    <string name="welcome_screen">MovieDB</string>
+    <string name="genre_name">Genre Name</string>
+    <string name="all_genre">All Genre</string>
+    <string name="txt_popular">Trending Now</string>
+    <string name="rating">Ratings: %1$s</string>
+    <string name="vote">Vote: %1$s</string>
+    <string name="release">Released: %1$s</string>
+    <string name="review">User Review</string>
+    <string name="txt_favorite">Favorite</string>
+    <string name="review_by">By: %1$s</string>
+    <string name="txt_movie_name">Movie Name</string>
+    <string name="search_movie">Search movie…</string>
+    <string name="search">Search</string>
+    <string name="search_result">%1$s Search Result</string>
+    <string name="overview">Overview</string>
+    <string name="title">Title: %1$s</string>
+</resources>
