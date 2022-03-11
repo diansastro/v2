@@ -16,5 +16,6 @@
     <string name="search">Search</string>
     <string name="search_result">%1$s Search Result</string>
     <string name="overview">Overview</string>
+    <string name="favourite">Add to Favourite</string>
     <string name="title">Title: %1$s</string>
 </resources>

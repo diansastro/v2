@@ -7,9 +7,12 @@ import com.google.android.youtube.player.YouTubePlayer
 import com.google.android.youtube.player.YouTubePlayerSupportFragment
 import com.widi.movieapp.R
 import com.widi.movieapp.base.BaseMvpActivity
+import com.widi.movieapp.body.MarkAsFavouriteBody
 import com.widi.movieapp.data.response.MovieTrailerResponse
 import com.widi.movieapp.model.MovieTrailerData
 import com.widi.movieapp.objects.Params
+import com.widi.movieapp.view.MovieActivity
+import com.widi.movieapp.view.TabList
 import dagger.android.AndroidInjection
 import dagger.android.DispatchingAndroidInjector
 import kotlinx.android.synthetic.main.activity_movie_detail.*
@@ -33,6 +36,7 @@ open class MovieDetailActivity: BaseMvpActivity<MovieDetailPresenter>(), MovieDe
     private var movieId: Int = 0
     private var title: String = ""
     private var desc: String = ""
+    private var accountId: Int = 0
     private val mData = arrayListOf<MovieTrailerData>()
     private val RECOVERY_DIALOG_REQUEST = 1
     private var videoUrl: String? = ""
@@ -49,6 +53,7 @@ open class MovieDetailActivity: BaseMvpActivity<MovieDetailPresenter>(), MovieDe
         showLoading()
         initBundle()
         presenter.execMovieTrailer(movieId)
+        initAction()
     }
 
     override fun getLayout(): Int = R .layout.activity_movie_detail
@@ -74,6 +79,15 @@ open class MovieDetailActivity: BaseMvpActivity<MovieDetailPresenter>(), MovieDe
         tvMovieDesc.text = desc
     }
 
+    private fun initAction() {
+        tvFavourite.setOnClickListener {
+            showLoading()
+            accountId = 11951863
+            presenter.execPostFavourite(accountId, MarkAsFavouriteBody("movie", movieId, true))
+            dismissLoading()
+        }
+    }
+
     override fun getMovieTrailer(movieTrailerResponse: MovieTrailerResponse?) {
         if (movieTrailerResponse?.results?.size!! > 0) {
             mData.addAll(movieTrailerResponse.results)
@@ -85,6 +99,11 @@ open class MovieDetailActivity: BaseMvpActivity<MovieDetailPresenter>(), MovieDe
 
         initView()
         dismissLoading()
+    }
+
+    override fun onSuccess() {
+        Toast.makeText(this, "Success add to Favourite", Toast.LENGTH_SHORT).show()
+        onBackPressed()
     }
 
     override fun onInitializationSuccess(provider: YouTubePlayer.Provider, youTubePlayer: YouTubePlayer, wasResored: Boolean) {

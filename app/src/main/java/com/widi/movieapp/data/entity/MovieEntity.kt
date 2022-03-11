@@ -1,10 +1,14 @@
 package com.widi.movieapp.data.entity
 
 import android.content.Context
+import com.widi.movieapp.body.MarkAsFavouriteBody
 import com.widi.movieapp.data.BasicAbstractNetwork
 import com.widi.movieapp.data.api.MovieApi
 import com.widi.movieapp.data.response.*
+import com.widi.movieapp.extension.uiSubscribe
+import com.widi.movieapp.objects.NetworkCode
 import io.reactivex.Observable
+import io.reactivex.disposables.Disposable
 import retrofit2.Response
 import javax.inject.Inject
 
@@ -20,4 +24,16 @@ class MovieEntity @Inject constructor(context: Context): BasicAbstractNetwork<Mo
     fun getMovieTrailer(movieId: Int): Observable<Response<MovieTrailerResponse>> = networkService().getMovieTrailer(movieId)
 
     fun searchMovie(query: String): Observable<Response<MovieListResponse>> = networkService().searchMovie(query)
+
+    fun postFavourite(accountId: Int, markAsFavourite: MarkAsFavouriteBody): Observable<Response<FavouriteResponse>> = networkService().postFavourite(accountId, markAsFavourite)
+
+    fun execMarkFavourite(onNext: (Response<FavouriteResponse>) -> Unit = {},
+                          onError: (Throwable) -> Unit = {},
+                          onComplete: () -> Unit = {},
+                          accountId: Int,
+                          markAsFavourite: MarkAsFavouriteBody): Disposable {
+        return postFavourite(accountId, markAsFavourite).uiSubscribe({
+            onNext.invoke(it)
+        }, onError, onComplete)
+    }
 }

@@ -10,9 +10,12 @@ open class ContentTypeInterceptor: Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
-        val uri = request.url().newBuilder()
+        val uri = request.url()
+            .newBuilder()
             .addQueryParameter("api_key", BuildConfig.TMDB_API_KEY).build()
-        return chain.proceed(request.newBuilder().url(uri).build())
+        val rq = request.newBuilder().url(uri).build()
+        addHeader(rq)
+        return chain.proceed(rq)
     }
 
     fun addHeader(oriRequest: Request): Request {

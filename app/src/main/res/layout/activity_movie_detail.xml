@@ -51,6 +51,21 @@
                 android:text="@string/title"
                 android:textColor="@color/dark_blue"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tvFavourite"
+                app:layout_constraintTop_toBottomOf="@+id/ytPlayer"/>
+
+            <TextView
+                android:id="@+id/tvFavourite"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="@dimen/_9ssp"
+                android:padding="@dimen/_10sdp"
+                android:text="@string/favourite"
+                android:textColor="@color/dark_blue"
+                android:drawableStart="@drawable/stars"
+                android:gravity="center"
+                android:drawablePadding="@dimen/_5sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ytPlayer"/>
 
