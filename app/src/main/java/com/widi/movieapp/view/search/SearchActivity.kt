@@ -1,8 +1,13 @@
 package com.widi.movieapp.view.search
 
 import android.app.Activity
+import android.app.AlertDialog
+import android.content.Context
 import android.content.res.Configuration
 import android.view.View
+import android.view.View.OnFocusChangeListener
+import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jaeger.library.StatusBarUtil
@@ -19,6 +24,7 @@ import kotlinx.android.synthetic.main.activity_search.*
 import kotlinx.android.synthetic.main.top_nav_search.*
 import javax.inject.Inject
 
+
 open class SearchActivity: BaseMvpActivity<SearchPresenter>(), SearchContract.View {
 
     @Inject
@@ -30,6 +36,7 @@ open class SearchActivity: BaseMvpActivity<SearchPresenter>(), SearchContract.Vi
     private var query: String = ""
     private var movieData = arrayListOf<MovieData>()
     private lateinit var movieListAdapter: MovieListAdapter
+    private lateinit var dialog: AlertDialog
 
     override fun initPresenterView() {
         presenter.view = this
@@ -40,8 +47,8 @@ open class SearchActivity: BaseMvpActivity<SearchPresenter>(), SearchContract.Vi
     }
 
     override fun setup() {
-//        showLoading()
         initView()
+        openSoftKeyboard(this)
         initAction()
     }
 
@@ -93,6 +100,12 @@ open class SearchActivity: BaseMvpActivity<SearchPresenter>(), SearchContract.Vi
             isNestedScrollingEnabled = false
         }
         dismissLoading()
+    }
+
+    private fun openSoftKeyboard(context: Context) {
+        edtSearch.requestFocus()
+        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.showSoftInput(edtSearch, InputMethodManager.SHOW_IMPLICIT)
     }
 
     private fun isDarkTheme(activity: Activity): Boolean {
