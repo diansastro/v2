@@ -6,6 +6,7 @@ import com.widi.movieapp.data.BasicAbstractNetwork
 import com.widi.movieapp.data.api.MovieApi
 import com.widi.movieapp.data.response.*
 import com.widi.movieapp.extension.uiSubscribe
+import com.widi.movieapp.model.RequestTokenData
 import com.widi.movieapp.objects.NetworkCode
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
@@ -25,6 +26,8 @@ class MovieEntity @Inject constructor(context: Context): BasicAbstractNetwork<Mo
 
     fun searchMovie(query: String): Observable<Response<MovieListResponse>> = networkService().searchMovie(query)
 
+    fun requestNewToken(): Observable<Response<RequestTokenData>> = networkService().requestNewToken()
+
     fun postFavourite(accountId: Int, markAsFavourite: MarkAsFavouriteBody): Observable<Response<FavouriteResponse>> = networkService().postFavourite(accountId, markAsFavourite)
 
     fun execMarkFavourite(onNext: (Response<FavouriteResponse>) -> Unit = {},
@@ -36,4 +39,6 @@ class MovieEntity @Inject constructor(context: Context): BasicAbstractNetwork<Mo
             onNext.invoke(it)
         }, onError, onComplete)
     }
+
+    fun getFavouriteMovie(accountId: Int): Observable<Response<FavouriteMovieResponse>> = networkService().getFavouriteMovie(accountId)
 }
