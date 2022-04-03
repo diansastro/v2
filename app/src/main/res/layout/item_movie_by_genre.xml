@@ -50,12 +50,21 @@
             android:textColor="@color/dark_blue"
             android:textSize="@dimen/_9ssp" />
 
+        <ImageView
+            android:id="@+id/ivRating"
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
+            android:layout_toEndOf="@+id/thumbnail"
+            android:layout_alignParentBottom="true"
+            android:padding="@dimen/_3sdp"
+            android:src="@drawable/stars"/>
+
         <TextView
             android:id="@+id/rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_toEndOf="@id/thumbnail"
+            android:layout_toEndOf="@id/ivRating"
             android:textColor="@color/light_blue"
             android:textSize="@dimen/_8ssp"
             android:text="@string/rating"

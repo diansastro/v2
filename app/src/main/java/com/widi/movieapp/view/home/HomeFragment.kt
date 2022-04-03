@@ -2,6 +2,7 @@ package com.widi.movieapp.view.home
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.widi.movieapp.R
 import com.widi.movieapp.base.BaseMvpFragment
 import com.widi.movieapp.data.response.GenreListResponse
@@ -93,6 +94,11 @@ open class HomeFragment: BaseMvpFragment<HomePresenter>(), HomeContract.View {
                 movieData.clear()
                 showLoading()
                 presenter.execMovieByGenre(genreListData[position].id!!)
+                activity?.let {
+                    val snack = Snackbar.make(view, getString(R.string.current_genre, genreListData[position].name), Snackbar.LENGTH_SHORT)
+                    snack.view.setBackgroundColor(context?.getColor(R.color.light_blue)!!)
+                    snack.show()
+                }
             }
             notifyDataSetChanged()
         }

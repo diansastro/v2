@@ -3,9 +3,11 @@
     <string name="press_back_to_exit">Press back to exit</string>
     <string name="welcome_screen">MovieDB</string>
     <string name="genre_name">Genre Name</string>
+    <string name="current_genre">Selected Genre: %1$s</string>
     <string name="all_genre">All Genre</string>
     <string name="txt_popular">Trending Now</string>
     <string name="rating">Ratings: %1$s</string>
+    <string name="delete">Delete</string>
     <string name="vote">Vote: %1$s</string>
     <string name="release">Released: %1$s</string>
     <string name="review">User Review</string>
