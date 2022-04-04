@@ -52,8 +52,8 @@
 
         <ImageView
             android:id="@+id/ivRating"
-            android:layout_width="@dimen/_15sdp"
-            android:layout_height="@dimen/_15sdp"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
             android:layout_toEndOf="@+id/thumbnail"
             android:layout_alignParentBottom="true"
             android:padding="@dimen/_3sdp"
@@ -67,10 +67,10 @@
             android:layout_toEndOf="@id/ivRating"
             android:textColor="@color/light_blue"
             android:textSize="@dimen/_8ssp"
+            android:paddingBottom="@dimen/_5sdp"
             android:text="@string/rating"
             android:gravity="center"
-            android:drawablePadding="@dimen/_3sdp"
-            android:drawableStart="@drawable/stars"/>
+            android:drawablePadding="@dimen/_3sdp"/>
 
     </RelativeLayout>
 
