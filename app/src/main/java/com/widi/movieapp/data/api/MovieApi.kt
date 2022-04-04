@@ -20,6 +20,9 @@ interface MovieApi {
     @GET("movie/{movie_id}/videos")
     fun getMovieTrailer(@Path("movie_id") movieId: Int): Observable<Response<MovieTrailerResponse>>
 
+    @GET("movie/{movie_id}/images")
+    fun getImageGallery(@Path("movie_id") movieId: Int): Observable<Response<ImageGalleryResponse>>
+
     @GET("search/movie")
     fun searchMovie(@Query("query") query: String): Observable<Response<MovieListResponse>>
 

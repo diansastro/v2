@@ -94,7 +94,6 @@
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:paddingBottom="@dimen/_10sdp"
                 android:text="@string/overview"
                 android:textColor="@color/dark_blue"
                 android:gravity="start|fill"
@@ -102,6 +101,31 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvOverview"/>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/carousel_container"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:cardCornerRadius="16dp"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:layout_constraintDimensionRatio="3:2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvMovieDesc">
+
+                <org.imaginativeworld.whynotimagecarousel.ImageCarousel
+                    android:id="@+id/carouselGallery"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:autoWidthFixing="true"
+                    app:carouselType="BLOCK"
+                    app:autoPlay="true"
+                    app:touchToPause="true"
+                    app:autoPlayDelay="3000"
+                    app:showNavigationButtons="false"
+                    />
+
+            </com.google.android.material.card.MaterialCardView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

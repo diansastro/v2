@@ -38,4 +38,17 @@ class MovieDetailPresenter @Inject constructor(val movieEntity: MovieEntity): Ba
             view?.errorScreen(it.localizedMessage)
         }, {}, accountId, favouriteBody))
     }
+
+    override fun execMovieGallery(movieId: Int) {
+        addSubscription(movieEntity.getImageGallery(movieId).uiSubscribe({
+            when(it.code()) {
+                NetworkCode.CODE_OK -> view?.getMovieGallery(it.body())
+                else -> {
+                    view?.errorScreen("Unable to Load Data")
+                }
+            }
+        }, {
+           view?.errorScreen(it.localizedMessage)
+        }, {}))
+    }
 }

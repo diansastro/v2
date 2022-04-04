@@ -8,14 +8,15 @@ import com.google.android.youtube.player.YouTubePlayerSupportFragment
 import com.widi.movieapp.R
 import com.widi.movieapp.base.BaseMvpActivity
 import com.widi.movieapp.body.MarkAsFavouriteBody
+import com.widi.movieapp.data.response.ImageGalleryResponse
 import com.widi.movieapp.data.response.MovieTrailerResponse
+import com.widi.movieapp.model.ImageData
 import com.widi.movieapp.model.MovieTrailerData
 import com.widi.movieapp.objects.Params
-import com.widi.movieapp.view.MovieActivity
-import com.widi.movieapp.view.TabList
 import dagger.android.AndroidInjection
 import dagger.android.DispatchingAndroidInjector
 import kotlinx.android.synthetic.main.activity_movie_detail.*
+import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
 import org.jetbrains.anko.intentFor
 import javax.inject.Inject
 
@@ -38,6 +39,9 @@ open class MovieDetailActivity: BaseMvpActivity<MovieDetailPresenter>(), MovieDe
     private var desc: String = ""
     private var accountId: Int = 0
     private val mData = arrayListOf<MovieTrailerData>()
+    private val imageData = arrayListOf<ImageData>()
+    private val carouselList = mutableListOf<CarouselItem>()
+    private val imgPath: String = "https://image.tmdb.org/t/p/original/"
     private val RECOVERY_DIALOG_REQUEST = 1
     private var videoUrl: String? = ""
 
@@ -53,6 +57,7 @@ open class MovieDetailActivity: BaseMvpActivity<MovieDetailPresenter>(), MovieDe
         showLoading()
         initBundle()
         presenter.execMovieTrailer(movieId)
+        presenter.execMovieGallery(movieId)
         initAction()
     }
 
@@ -104,6 +109,15 @@ open class MovieDetailActivity: BaseMvpActivity<MovieDetailPresenter>(), MovieDe
     override fun onSuccess() {
         Toast.makeText(this, "Success add to Favourite", Toast.LENGTH_SHORT).show()
         onBackPressed()
+    }
+
+    override fun getMovieGallery(imageGalleryResponse: ImageGalleryResponse?) {
+        imageData.addAll(imageGalleryResponse?.backdrops!!)
+        imageGalleryResponse.backdrops.forEach {
+            carouselList.add(CarouselItem(imageUrl = imgPath.plus(it.file_path)))
+        }
+        carouselGallery.setData(carouselList)
+        dismissLoading()
     }
 
     override fun onInitializationSuccess(provider: YouTubePlayer.Provider, youTubePlayer: YouTubePlayer, wasResored: Boolean) {

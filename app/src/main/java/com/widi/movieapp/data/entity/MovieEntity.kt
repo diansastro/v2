@@ -24,6 +24,8 @@ class MovieEntity @Inject constructor(context: Context): BasicAbstractNetwork<Mo
 
     fun getMovieTrailer(movieId: Int): Observable<Response<MovieTrailerResponse>> = networkService().getMovieTrailer(movieId)
 
+    fun getImageGallery(movieId: Int): Observable<Response<ImageGalleryResponse>> = networkService().getImageGallery(movieId)
+
     fun searchMovie(query: String): Observable<Response<MovieListResponse>> = networkService().searchMovie(query)
 
     fun requestNewToken(): Observable<Response<RequestTokenData>> = networkService().requestNewToken()
